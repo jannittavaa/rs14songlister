@@ -39,7 +39,7 @@ void FileLocator::buildFilenames()
 	std::cout << "Files read:" << std::endl;
 	std::string filename;
 	std::string psarc_extension;
-	for(auto p : fs::directory_iterator(path_)) {
+	for(auto &p : fs::directory_iterator(path_)) {
 		oss_ << p;
 		filename = oss_.str();
 		this->resetSS();

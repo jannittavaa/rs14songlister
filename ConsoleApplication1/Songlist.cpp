@@ -41,7 +41,7 @@ void Songlist::printSonglistToFile(std::string const &filename) const
 void Songlist::buildSonglist()
 {
 	Song song;
-	for (auto i : filelist_) {
+	for (auto &i : filelist_) {
 		song=this->parseFilename(i);
 		if (song.artist != "" && song.songname != "") {
 			this->addSong(song);
@@ -79,4 +79,32 @@ void Songlist::removeDashes(std::string &str) const
 {
 	// Removes dashes in bandnames even if not wanted eg. Blink-182.
 	replace(str.begin(), str.end(), '-', ' ');
+}
+
+bool Songlist::isDuplicate(std::string songname, std::vector<std::string> songvector)
+{
+	std::string songFromVector;
+	removeChar(songname);
+	toLowerCase(songname);
+	for (auto song : songvector) {
+		songFromVector = song;
+		removeChar(songFromVector);
+		toLowerCase(songFromVector);
+		if (songname == songFromVector) {
+			return true;
+		} else {
+			continue;
+		}	
+	}
+	return false;
+}
+
+void Songlist::toLowerCase(std::string & str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+}
+
+void Songlist::removeChar(std::string & str, char character)
+{
+	str.erase(std::remove(str.begin(), str.end(), character), str.end());
 }

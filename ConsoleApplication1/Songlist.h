@@ -23,10 +23,15 @@ public:
 	void printSonglistToFile(std::string const &filename) const;
 	void buildSonglist();
 private:
-	std::regex file_rx_;
-	void addSong(Song const &song);
 	Song parseFilename(std::string const &filename) const;
+	void addSong(Song const &song);
 	void removeDashes(std::string &str) const;
+	bool isDuplicate(std::string songname, 
+		std::vector<std::string> songvector);
+	void toLowerCase(std::string &str);
+	void removeChar(std::string &str, char character=' ');
+
+	std::regex file_rx_;
 	std::vector<std::string> filelist_;
 	std::map<std::string, std::vector<std::string>> formattedSonglist_;
 };

@@ -20,6 +20,7 @@ private:
 	// Avain?
 	bool getPathFromReg();
 	void resetSS();
+
 	std::string strPath_;
 	fs::path path_;
 	std::vector<std::string> filenames_;
